@@ -1,7 +1,7 @@
-# HireLinks Job Scraper
+
 
 ## 📌 Giới thiệu  
-Dự án này được phát triển nhằm giải quyết **take-home assignment** của HireLinks.  
+Dự án này được phát triển nhằm giải quyết bài toán crawl dữ liệu từ một website tuyển dụng Đức.  
 Mục tiêu là xây dựng một công cụ **scraping dữ liệu việc làm** từ website của [Arbeitsagentur](https://www.arbeitsagentur.de/jobsuche) và chuẩn hóa dữ liệu theo định dạng yêu cầu.  
 
 Ngoài ra, dự án còn mở rộng với các tính năng bonus: lưu dữ liệu vào cơ sở dữ liệu, xử lý thiếu thông tin liên hệ, và tự động giải CAPTCHA.  
