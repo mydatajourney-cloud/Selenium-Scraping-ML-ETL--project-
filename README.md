@@ -74,7 +74,7 @@ Thông tin được trích xuất và chuẩn hóa dưới dạng bảng có c�
    docker volume create spark_lib
    docker compose up -d
    ```
-- Khởi tạo spark container để chạy code, lưu ý rằng nên Spark trong dự án này sẽ đọc trên S3, biến đổi sau đó lưu vô postgres nên hãy nhớ S3 path và authen cho postgres. Lưu ý rằng Access key sẽ không nằm trong code !, chỉ nằm ở trong lúc chạy lệnh dưới thêm -e 
+- Khởi tạo spark container để chạy code, lưu ý rằng nên Spark trong dự án này sẽ đọc trên S3, biến đổi sau đó lưu vô postgres nên hãy nhớ đổi S3 path, authen cho postgres, thư mục local mounting lưu trữ các file để container đọc. Lưu ý rằng Access key sẽ không nằm trong code !, chỉ nằm ở trong lúc chạy lệnh dưới thêm -e 
    ```bash
    docker run -ti --name application --user root --network=streaming-network -p 4040:4040 -v "C:\Users\VivoBook\Documents\take_home_assignment\99-project\spark:/spark" -v spark_lib:/opt/bitnami/spark/.ivy2 -v spark_data:/data -e PYSPARK_DRIVER_PYTHON=python -e PYSPARK_PYTHON=./environment/bin/python unigap/spark:3.5 bash -c "mkdir -p /var/lib/apt/lists/partial && apt-get update && apt-get install -y python3-venv python3-pip && python -m venv pyspark_venv --system-site-packages && source pyspark_venv/bin/activate && pip install -r /spark/requirements.txt && venv-pack -o pyspark_venv.tar.gz && spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1,org.postgresql:postgresql:42.7.3 --archives pyspark_venv.tar.gz#environment --py-files /spark/browser.zip /spark/main.py"
 ```
