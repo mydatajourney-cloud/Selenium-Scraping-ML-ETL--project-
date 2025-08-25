@@ -156,6 +156,7 @@ def search_for_email(driver, wait, Application_link,External_link):
         if not Email:
             contact_pattern = ["contact", "kontakt", "imprint", "impressum"]
             for contact in contact_pattern:
+                # Tìm kiếm bằng contact element 
                 try:
                     el = driver.find_element(f"xpath", f"//*[text()='{contact}']")
                     driver.get(el.get_attribute("href"))
@@ -171,7 +172,7 @@ def search_for_email(driver, wait, Application_link,External_link):
 
                 except Exception as e:
                     print(f"Lỗi khi tìm contact_element {contact}: Thử tìm email với suffix {contact}")
-
+                # Tìm kiếm bằng suffix
                 try:       
                     parsed = urlparse(External_link)
                     domain = f"{parsed.scheme}://{parsed.netloc}" + "/" + contact
@@ -185,7 +186,7 @@ def search_for_email(driver, wait, Application_link,External_link):
                     else: 
                         print(f"Không tìm thấy Email bằng suffix trong {link}")
                 except: 
-                    print(f"Lỗi khi tìm Email bằng suffix trong  {domain}")
+                    print(f"Lỗi khi tìm Email bằng suffix {contact}")
 
 
     if not Email and External_link:
@@ -203,6 +204,7 @@ def search_for_email(driver, wait, Application_link,External_link):
             if not Email:
                 contact_pattern = ["contact", "kontakt", "imprint", "impressum"]
                 for contact in contact_pattern:
+                    # Tìm kiếm bằng contact_element
                     try:
                         el = driver.find_element(f"xpath", f"//*[text()='{contact}']")
                         driver.get(el.get_attribute("href"))
@@ -217,7 +219,7 @@ def search_for_email(driver, wait, Application_link,External_link):
                             print(f"Không thấy Email thông qua contact_element trong {link}" )
                     except Exception as e:
                         print(f"Lỗi khi tìm contact_element với {contact}:", e)
-
+                    # Tìm kiếm bằng suffix
                     try:       
                         parsed = urlparse(External_link)
                         domain = f"{parsed.scheme}://{parsed.netloc}" + "/" + contact
@@ -231,7 +233,7 @@ def search_for_email(driver, wait, Application_link,External_link):
                         else: 
                             print(f"Không tìm thấy Email trong {link}") 
                     except: 
-                        print(f"Lỗi khi tìm Email bằng suffix trong {domain}")
+                        print(f"Lỗi khi tìm Email bằng suffix {contact}")
 
         except Exception as e:
             print("Lỗi khi truy cập External_link:", e)
@@ -250,6 +252,7 @@ def get_salarylist(driver, wait, job_items):
             print("No salary for job", i+1)
             Salary_list.append("")
     return Salary_list
+
 
 
 
