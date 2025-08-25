@@ -43,36 +43,17 @@ Thông tin được trích xuất và chuẩn hóa dưới dạng bảng có c�
 ---
 
 ## ⚙️ Công nghệ sử dụng  
-- Ngôn ngữ: Python / Node.js / (tuỳ chọn của bạn khi hiện thực)  
-- Thư viện gợi ý:  
-  - Scraping: `requests`, `BeautifulSoup`, `Selenium`, `Playwright`  
-  - Database: `PostgreSQL / MySQL / SQLite`  
-  - ORM: `SQLAlchemy` hoặc `Prisma`  
-  - CAPTCHA: `pytesseract`, `anti-captcha` API  
-
----
-
-## 📂 Cấu trúc dự án (gợi ý)  
-```
-├── src/
-│   ├── scraper.py       # Logic scrape dữ liệu
-│   ├── parser.py        # Chuẩn hoá dữ liệu
-│   ├── db.py            # Kết nối & load vào database
-│   ├── utils.py         # Xử lý email, link liên hệ
-├── requirements.txt     # Thư viện Python
-├── Dockerfile           # Nếu chạy trong container
-├── README.md            # Tài liệu dự án
-```
-
+- Ngôn ngữ: Python (tuỳ chọn của bạn khi hiện thực)  
+- Thư viện sử dụng:  
+  - Scraping: `requests`,`Selenium`
+  - Database: `PostgreSQL` 
+  - CAPTCHA: `pytesseract`, `anti-captcha` API
+  - ETL: Spark , Docker
 ---
 
 ## ▶️ Cách chạy dự án  
 
 1. **Clone repo**  
-   ```bash
-   git clone https://github.com/<your-username>/hirelinks-job-scraper.git
-   cd hirelinks-job-scraper
-   ```
 
 2. **Cài đặt dependencies**  
    ```bash
@@ -81,13 +62,22 @@ Thông tin được trích xuất và chuẩn hóa dưới dạng bảng có c�
 
 3. **Chạy scraper**  
    ```bash
-   python src/scraper.py
+   python scraping/scraper.py
    ```
 
-4. **(Tuỳ chọn) Load vào DB**  
+4. **Chạy Spark bằng docker**
+- Khởi tạo spark cluster
    ```bash
-   python src/db.py
+   docker network create streaming-network --driver bridge
+   docker build -t unigap/spark:3.5 .
+   docker volume create spark_data
+   docker volume create spark_lib
+   docker compose up -d
    ```
+- Khởi tạo spark container để chạy code, lưu ý rằng nên Spark trong dự án này sẽ đọc trên S3, biến đổi sau đó lưu vô postgres nên hãy nhớ S3 path và authen cho postgres. Lưu ý rằng Access key sẽ không nằm trong code !, chỉ nằm ở trong lúc chạy lệnh dưới thêm -e 
+   ```bash
+   docker run -ti --name application --user root --network=streaming-network -p 4040:4040 -v "C:\Users\VivoBook\Documents\take_home_assignment\99-project\spark:/spark" -v spark_lib:/opt/bitnami/spark/.ivy2 -v spark_data:/data -e PYSPARK_DRIVER_PYTHON=python -e PYSPARK_PYTHON=./environment/bin/python unigap/spark:3.5 bash -c "mkdir -p /var/lib/apt/lists/partial && apt-get update && apt-get install -y python3-venv python3-pip && python -m venv pyspark_venv --system-site-packages && source pyspark_venv/bin/activate && pip install -r /spark/requirements.txt && venv-pack -o pyspark_venv.tar.gz && spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1,org.postgresql:postgresql:42.7.3 --archives pyspark_venv.tar.gz#environment --py-files /spark/browser.zip /spark/main.py"
+```
 
 ---
 
