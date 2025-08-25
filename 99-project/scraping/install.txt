@@ -1,0 +1,7 @@
+pandas
+parsel
+selenium
+webdriver-manager
+opencv-python
+matplotlib
+scikit-learn

@@ -1,0 +1,5 @@
+pyspark==3.5.1
+venv-pack
+pyyaml
+psycopg2-binary==2.9.9
+pandas>=1.0.5
