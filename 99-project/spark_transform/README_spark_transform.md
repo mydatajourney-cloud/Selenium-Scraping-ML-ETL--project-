@@ -42,7 +42,7 @@ spark_transform/
 
 ## 🎯 Kết quả đạt được
 - Dữ liệu thô ban đầu được **chuẩn hoá và làm sạch** bằng Spark  
-- Kết quả đầu ra sẽ đi vào postgres, tuy nhiên dữ liệu kết quả output sẽ được mô tả ở trong thư mục:
+- Kết quả đầu ra sẽ đi vào **postgres**, tuy nhiên dữ liệu kết quả output sẽ được mô tả ở trong thư mục:
 ```
 data/output/
 ---
