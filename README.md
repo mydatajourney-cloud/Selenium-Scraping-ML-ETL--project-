@@ -27,16 +27,16 @@ Thông tin được trích xuất và chuẩn hóa dưới dạng bảng có c�
 
 ## 🎯 Bonus Features (tuỳ chọn)  
 
-1. **Transform & Load Data into Database**  
+1. **Transform & Load Data into Database (hoàn thành)**  
    - Spin up database (local/Docker).  
    - Tạo bảng, transform và lưu dữ liệu scrape được vào DB.  
 
-2. **Handle Missing Emails & Websites**  
+2. **Handle Missing Emails & Websites (hoàn thành)**  
    - Nếu không có email:  
      - Trích xuất từ Application Link.  
      - Nếu có external link, thử scrape thêm từ `/contact`, `/impressum`, `/kontakt`.  
 
-3. **CAPTCHA Handling**  
+3. **CAPTCHA Handling (một phần)**  
    - Ban đầu cần giải CAPTCHA thủ công.  
    - Có thể nghiên cứu hướng OCR/ML hoặc dịch vụ bên thứ ba để tự động hoá.  
 
