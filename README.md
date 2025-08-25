@@ -48,7 +48,7 @@ Thông tin được trích xuất và chuẩn hóa dưới dạng bảng có c�
   - Scraping: `requests`,`Selenium`
   - Database: `PostgreSQL` 
   - CAPTCHA: `pytesseract`, `anti-captcha` API
-  - ETL: Spark , Docker
+  - ETL: `Spark` , `Docker`
 ---
 
 ## ▶️ Cách chạy dự án  
