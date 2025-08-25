@@ -15,7 +15,6 @@ services:
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
       - SPARK_USER=spark
-      - AWS_DEFAULT_REGION=us-east-2
     ports:
       - '8080:8080'
   spark-worker:
@@ -36,7 +35,6 @@ services:
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
       - SPARK_USER=spark
-      - AWS_DEFAULT_REGION=us-east-2
 
 networks:
   streaming-network:
